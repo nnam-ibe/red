@@ -60,7 +60,7 @@ class App extends Component {
             <Router>
                 <div>
                     <AppHeaderWrapper user={this.state.user}/>
-                    <div className="mt-5">
+                    <div className="red-content">
                         <Route exact path="/" component={AppBody}/>
                         <Route exact path="/signup" component={SignUp}/>
                         <Route path="/admin/:page" component={Admin}/>

@@ -45,9 +45,9 @@ class Announcements extends Component {
         )
     }
 
-    componentDidMount() {
-        var anncWTags = [];
-        firestore.collection("announcements").get().then((snapShot) => {
+    componentWillMount() {
+        firestore.collection("announcements").onSnapshot((snapShot) => {
+            var anncWTags = [];
             snapShot.forEach((doc) => {
                 if (doc.exists) {
                     console.log(`${doc.id} => ${doc.data().title}`);
@@ -73,12 +73,10 @@ class Announcements extends Component {
                         </div>
                     )
                     anncWTags.push(annc);
-                    this.setState({anncWTags: anncWTags})
-                } else {
-                    console.log("No such element")
                 }
             })
-        })
+            this.setState({anncWTags: anncWTags})
+        });
     }
 
     handleTextChange = (event) => {

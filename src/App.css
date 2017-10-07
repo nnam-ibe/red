@@ -23,6 +23,10 @@
     padding-top: 15px;
 }
 
+.red-content {
+    margin-top: 56px;
+}
+
 .red-sidebar {
     position: -webkit-sticky;
     position: sticky;

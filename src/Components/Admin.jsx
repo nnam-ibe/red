@@ -19,23 +19,23 @@ class Admin extends Component {
         return (
             <div className="container-fluid">
                 <div className="row flex-xl-nowrap">
-                    <div className="red-sidebar col-12 col-md-3 col-xl-2 border pt-4 border-top-0 border-secondary">
+                    <div className="red-sidebar col-12 col-md-3 col-xl-2 border border-top-0 border-secondary">
                         <nav className="nav flex-column">
                             <li className="nav-item">
-                                <a id="over" href="overview" className={`nav-link ${this.state.page === <Overview/> ? "active" : ""}`}>Overview</a>
+                                <a id="over" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Overview</a>
                             </li>
                             <li className="nav-item">
-                                <a id="annc" href="announcements" className={`nav-link ${this.state.page === <Announcements/> ? "active" : ""}`} >Announcements</a>
+                                <a id="annc" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Announcements</a>
                             </li>
                             <li className="nav-item">
-                                <a id="app" href="appointments" className={`nav-link ${this.state.page === <Overview/> ? "active" : ""}`} >Appointments</a>
+                                <a id="app" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Appointments</a>
                             </li>
                             <li className="nav-item">
-                                <a id="rar" href="repairs" className={`nav-link ${this.state.page === <Overview/> ? "active" : ""}`} >Repairs & Requests</a>
+                                <a id="rar" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Repairs & Requests</a>
                             </li>
                         </nav>
                     </div>
-                    <div className="content col-12 col-md-9 col-xl-8 py-4">
+                    <div className="content col-12 col-md-9 col-xl-8 pt-3">
                         { this.state.page }
                     </div>
                 </div>
@@ -43,19 +43,17 @@ class Admin extends Component {
         )
     }
 
-    componentWillMount() {
-        this.getPage(this.props.match.params.page)
-    }
-
-    getPage(page) {
-        if (page === 'overview') {
+    navClick = (event) => {
+        if (event.target.id === "over") {
             this.setState({
                 page: (<Overview />)
-            })
-        } else if (page === 'announcements') {
+            });
+        } else if (event.target.id === "annc") {
             this.setState({
                 page: <Announcements />
-            })
+            });
+        } else if (event.target.id === "app") {
+        } else if (event.target.id === "rar") {
         }
     }
 }
