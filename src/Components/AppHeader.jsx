@@ -37,7 +37,7 @@ class AppHeader extends Component {
     render() {
         return (
             <nav className="navbar navbar-dark fixed-top bg-dark">
-                <Link className="navbar-brand" to={`/`}>Red Riding</Link>
+                <Link className="navbar-brand" to={`/`}>Project Red</Link>
                 {
                     this.state.user.isAdmin ? (
                         <ul className="navbar-nav ml-auto mr-2 mt-2 mt-lg-0">
