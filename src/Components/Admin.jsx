@@ -19,7 +19,7 @@ class Admin extends Component {
         return (
             <div className="container-fluid">
                 <div className="row flex-xl-nowrap">
-                    <div className="sidebar col-12 col-md-3 col-xl-2 border border-top-0 border-secondary">
+                    <div className="red-sidebar col-12 col-md-3 col-xl-2 border pt-4 border-top-0 border-secondary">
                         <nav className="nav flex-column">
                             <li className="nav-item">
                                 <a id="over" href="overview" className={`nav-link ${this.state.page === <Overview/> ? "active" : ""}`}>Overview</a>

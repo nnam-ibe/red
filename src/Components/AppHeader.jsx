@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { auth, isAuthenticated } from '../fire';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
 class AppHeader extends Component {
@@ -48,7 +48,8 @@ class AppHeader extends Component {
                     ) : null
                 }
                 {
-                    isAuthenticated() ? (<Button outline color="primary" onClick={this.signOut}>Sign Out</Button>) : (<Button outline color="secondary" onClick={this.toggleSignIn}>Sign In</Button>)
+                    isAuthenticated() ? (<button type="button" className="btn btn-outline-primary" onClick={this.signOut}>Sign Out</button>)
+                                : (<button type="button" className="btn btn-outline-secondary" onClick={this.toggleSignIn}>Sign In</button>)
                 }
                 <Modal isOpen={this.state.signInModal} toggle={this.toggleSignIn}>
                     <ModalHeader toggle={this.toggleSignIn}>Sign In</ModalHeader>
@@ -63,7 +64,7 @@ class AppHeader extends Component {
                         </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.signIn}>Sign In</Button>
+                        <button type="button" className="btn btn-outline-primary" onClick={this.signIn}>Sign In</button>
                     </ModalFooter>
                 </Modal>
             </nav>

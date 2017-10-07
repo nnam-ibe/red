@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { firestore } from  '../fire';
 
 class Announcements extends Component {
@@ -6,13 +7,28 @@ class Announcements extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            anncWTags: []
+            anncWTags: [],
+            deleteModal: false,
+            docToDel: null,
         };
     }
 
     render() {
         return (
             <div className="announcements">
+                <Modal isOpen={this.state.deleteModal} toggle={this.toggledeleteModal} size="sm" className="mt-5">
+                    <ModalBody>
+                        <div className="">
+                            <p>Delete announcement?</p>
+                        </div>
+                    </ModalBody>
+                    <ModalFooter>
+                        <div className="px-2">
+                            <button type="button" className="btn btn-outline-secondary" onClick={this.toggledeleteModal}>Cancel</button>
+                            <button type="button" className="btn btn-outline-danger ml-1" onClick={this.deleteAnnouncement}>Delete</button>
+                        </div>
+                    </ModalFooter>
+                </Modal>
                 <div className="card mb-3" key="new_annc">
                     <div className="card-body container">
                         <h4 className="card-title">
@@ -52,6 +68,7 @@ class Announcements extends Component {
                                     <textarea className="py-1 px-1" id={`${doc.id}_text`} rows="4" cols="50" type="text" onChange={this.handleTextChange} defaultValue={doc.data().desc}/>
                                 </p>
                                 <button id={`${doc.id}_button`} type="button" className="btn btn-outline-primary" disabled>Save Changes</button>
+                                <button id={`${doc.id}_delete`} type="button" className="btn btn-outline-danger  ml-1" onClick={this.promptDelAnnc}>Delete Announcement</button>
                             </div>
                         </div>
                     )
@@ -75,7 +92,6 @@ class Announcements extends Component {
 
     saveChanges = (event) => {
         if (event) {
-            console.log("Even on to the next step")
             var docId = event.target.id.substring(0, event.target.id.indexOf("_"));
             var titleId = docId + "_title";
             var textId = docId + "_text";
@@ -118,6 +134,38 @@ class Announcements extends Component {
                 console.log("Something empty, had to back out")
             }
         }
+    }
+
+    promptDelAnnc = (event) => {
+        if (event) {
+            this.toggledeleteModal();
+            var docId = event.target.id.substring(0, event.target.id.indexOf("_"));
+            this.setState({
+                docToDel: docId
+            })
+        }
+    }
+
+    deleteAnnouncement = (event) => {
+        var docId = this.state.docToDel;
+        this.setState({
+            docToDel: null,
+        });
+        this.toggledeleteModal();
+        if (docId) {
+            firestore.collection('announcements').doc(docId).delete()
+                .catch((error) => {
+                    console.error("Error removing doc", error);
+                })
+        } else {
+            console.log("There is no doc to delete");
+        }
+    }
+
+    toggledeleteModal = () => {
+        this.setState({
+            deleteModal: !this.state.deleteModal,
+        });
     }
 
 }
