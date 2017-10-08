@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import AppHeader from './AppHeader'
 import AppBody from './AppBody'
-import SignUp from './SignUp'
-import Admin from './Admin'
+import AdminOverview from './Admin/AdminOverview'
+import RepairsOverview from './Repairs/RepairsOverview'
 import { auth, firestore, storageKey } from '../fire';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import '../App.css';
@@ -62,8 +62,8 @@ class App extends Component {
                     <AppHeaderWrapper user={this.state.user}/>
                     <div className="red-content">
                         <Route exact path="/" component={AppBody}/>
-                        <Route exact path="/signup" component={SignUp}/>
-                        <Route path="/admin/:page" component={Admin}/>
+                        <Route path="/admin" component={AdminOverview}/>
+                        <Route path="/repairs" component={RepairsOverview}/>
                     </div>
                 </div>
             </Router>

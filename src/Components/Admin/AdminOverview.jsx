@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import Overview from './Overview'
+import CreateUser from './CreateUser'
 import Announcements from './Announcements'
 
-class Admin extends Component {
+class AdminOverview extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            page: <Overview />
+            page: <CreateUser />
         };
-    }
-
-    createUser = () => {
-        this.props.history.push('/signup')
     }
 
     render() {
@@ -22,7 +18,7 @@ class Admin extends Component {
                     <div className="red-sidebar col-12 col-md-3 col-xl-2 border border-top-0 border-secondary">
                         <nav className="nav flex-column">
                             <li className="nav-item">
-                                <a id="over" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Overview</a>
+                                <a id="create" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Create User</a>
                             </li>
                             <li className="nav-item">
                                 <a id="annc" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Announcements</a>
@@ -44,9 +40,9 @@ class Admin extends Component {
     }
 
     navClick = (event) => {
-        if (event.target.id === "over") {
+        if (event.target.id === "create") {
             this.setState({
-                page: (<Overview />)
+                page: (<CreateUser />)
             });
         } else if (event.target.id === "annc") {
             this.setState({
@@ -58,4 +54,4 @@ class Admin extends Component {
     }
 }
 
-export default Admin;
+export default AdminOverview;

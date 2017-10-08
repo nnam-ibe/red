@@ -13,8 +13,8 @@ class AppBody extends Component {
     }
 
     getAnnouncements() {
-        var anncList = [];
-        firestore.collection("announcements").get().then((snapShot) => {
+        firestore.collection("announcements").onSnapshot((snapShot) => {
+            var anncList = [];
             snapShot.forEach((doc) => {
                 if ( doc.exists ) {
                     var annc = (
@@ -26,17 +26,11 @@ class AppBody extends Component {
                             </div>
                         </div>
                     )
-
                     anncList.push(annc);
-                    this.setState({anncList: anncList})
-                } else {
-                    console.log("No such document!");
                 }
             })
-        }).catch(function(error) {
-            console.log("Error getting announcements", error);
+            this.setState({anncList: anncList});
         });
-
     }
 
     render() {

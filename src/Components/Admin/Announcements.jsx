@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, ModalBody, ModalFooter } from 'reactstrap';
-import { firestore } from  '../fire';
+import { firestore } from  '../../fire';
 
 class Announcements extends Component {
 
@@ -31,11 +31,11 @@ class Announcements extends Component {
                 </Modal>
                 <div className="card mb-3" key="new_annc">
                     <div className="card-body container">
-                        <h4 className="card-title">
-                            <input  className="py-1 px-1" id="new_title" type="text" placeholder="Enter title"/>
-                        </h4>
+                        <h6 className="card-title">
+                            <input id="new_title" type="text" placeholder="Enter title"/>
+                        </h6>
                         <p className="card-text">
-                            <textarea className="py-1 px-1" id="new_text" rows="4" cols="50" type="text" placeholder="Enter description"/>
+                            <textarea id="new_text" rows="4" type="text" placeholder="Enter description"/>
                         </p>
                         <button id="new_button" onClick={this.postAnnouncememt} type="button" className="btn btn-outline-primary">Post Announcement</button>
                     </div>
@@ -61,11 +61,11 @@ class Announcements extends Component {
                     var annc = (
                         <div className="card mb-3" key={doc.id}>
                             <div className="card-body container">
-                                <h4 className="card-title">
-                                    <input className="py-1 px-1" id={`${doc.id}_title`} type="text" onChange={this.handleTextChange} defaultValue={doc.data().title}/>
-                                </h4>
+                                <h6 className="card-title">
+                                    <input id={`${doc.id}_title`} type="text" onChange={this.handleTextChange} defaultValue={doc.data().title}/>
+                                </h6>
                                 <p className="card-text">
-                                    <textarea className="py-1 px-1" id={`${doc.id}_text`} rows="4" cols="50" type="text" onChange={this.handleTextChange} defaultValue={doc.data().desc}/>
+                                    <textarea id={`${doc.id}_text`} rows="4" type="text" onChange={this.handleTextChange} defaultValue={doc.data().desc}/>
                                 </p>
                                 <button id={`${doc.id}_button`} type="button" className="btn btn-outline-primary" disabled>Save Changes</button>
                                 <button id={`${doc.id}_delete`} type="button" className="btn btn-outline-danger  ml-1" onClick={this.promptDelAnnc}>Delete Announcement</button>
