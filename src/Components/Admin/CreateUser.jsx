@@ -81,14 +81,7 @@ class CreateUser extends Component {
                     phone: phone.value,
                 });
 
-                this.setState({
-                    alert: {
-                        isOpen: false,
-                        message: "Successfully created user",
-                        color: "success",
-                    }
-                })
-                this.toggleAlert();
+                this.setAlert(true, "Successfully created user", "success")
 
                 fname.value = "";
                 lname.value = "";
@@ -97,38 +90,23 @@ class CreateUser extends Component {
                 phone.value = "";
             })
             .catch((error) => {
-                this.setState({
-                    alert: {
-                        isOpen: false,
-                        message: error.message,
-                        color: "danger",
-                    }
-                })
-                this.toggleAlert();
+                this.setAlert(true, error.message, "danger")
                 console.log(error);
             });
     }
 
     toggleAlert = () => {
-        if (this.state.alert.isOpen) {
-            this.setState({
-                alert: {
-                    isOpen: false,
-                    message: null,
-                    color: null,
-                }
-            });
-        } else {
-            var temp = this.state.alert;
-            temp.isOpen = true;
-            this.setState({
-                alert: {
-                    isOpen: true,
-                    message: this.state.alert.message,
-                    color: this.state.alert.color,
-                }
-            })
-        }
+        this.setAlert(false, null, null);
+    }
+
+    setAlert = (isOpen, message, color) => {
+        this.setState({
+            alert: {
+                isOpen: isOpen,
+                message: message,
+                color: color,
+            }
+        })
     }
 
 }
