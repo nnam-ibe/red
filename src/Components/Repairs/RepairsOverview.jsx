@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { isAuthenticated } from  '../../fire';
 import File from './File'
+import MyRequests from './MyRequests'
 
 class RepairsOverview extends Component {
 
@@ -28,10 +29,10 @@ class RepairsOverview extends Component {
                     <div className="red-sidebar col-12 col-md-3 col-xl-2 border border-top-0 border-secondary">
                         <nav className="nav flex-column">
                             <li className="nav-item">
-                                <a id="over" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Request Repair</a>
+                                <a id="file" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Request Repair</a>
                             </li>
                             <li className="nav-item">
-                                <a id="annc" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>My Requests</a>
+                                <a id="my-req" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>My Requests</a>
                             </li>
                         </nav>
                     </div>
@@ -41,6 +42,18 @@ class RepairsOverview extends Component {
                 </div>
             </div>
         )
+    }
+
+    navClick = (event) => {
+        if (event.target.id === "file") {
+            this.setState({
+                page: (<File />)
+            });
+        } else if (event.target.id === "my-req") {
+            this.setState({
+                page: <MyRequests />
+            });
+        }
     }
 
 }

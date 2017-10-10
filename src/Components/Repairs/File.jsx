@@ -101,7 +101,7 @@ class File extends Component {
             var nodeList = document.getElementsByClassName('room-checkbox');
             for (var i=0;  i<nodeList.length; i++) {
                 if(nodeList[i].checked) {
-                    rooms.push( document.getElementById(nodeList[i].id + "-l").innerHTML )
+                    rooms.push( nodeList[i].id + "-l" )
                 }
             }
             console.log(rooms);
