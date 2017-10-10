@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isAuthenticated } from  '../../fire';
 import CreateUser from './CreateUser'
 import Announcements from './Announcements'
 
@@ -7,8 +8,18 @@ class AdminOverview extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            page: <CreateUser />
-        };
+            page: null
+        }
+    }
+
+    componentWillMount() {
+        if (!isAuthenticated()) {
+            this.props.history.push('/');
+        } else {
+            this.setState({
+                page: <CreateUser />
+            })
+        }
     }
 
     render() {

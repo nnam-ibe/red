@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { firestore, auth } from  '../../fire';
+import { firestore, uid } from  '../../fire';
 import { Alert } from 'reactstrap';
 
 class File extends Component {
@@ -15,13 +15,31 @@ class File extends Component {
         }
     }
 
+    componentWillMount() {
+        firestore.collection('users').doc(localStorage.getItem(uid)).get()
+            .then((doc) => {
+                this.setState({
+                    name: `${doc.data().fname} ${doc.data().lname}`,
+                    unit: doc.data().unit,
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+                this.setAlert(true, error.message, "danger");
+            })
+    }
+
     render() {
         return (
             <div className="file">
                 <Alert color={this.state.alert.color} isOpen={this.state.alert.isOpen} toggle={this.toggleAlert}>
                     {this.state.alert.message}
                 </Alert>
-                <h3 className="mb-3">Request Repair</h3>
+                <h3 className="mb-3">Maintenance Request</h3>
+                <div>
+                    <p><strong>Name: </strong><em>{this.state.name}</em></p>
+                    <p><strong>Unit No: </strong><em>{this.state.unit}</em></p>
+                </div>
                 <div>
                     <div><p className="font-weight-bold">What rooms are affected</p></div>
                     <div className="row">
@@ -88,7 +106,7 @@ class File extends Component {
             }
             console.log(rooms);
 
-            firestore.collection('users').doc(auth.currentUser.uid)
+            firestore.collection('users').doc(localStorage.getItem(uid))
                 .collection('repairs').add({
                     desc: desc.value,
                     rooms: rooms,

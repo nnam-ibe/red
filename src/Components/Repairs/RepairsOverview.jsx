@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { isAuthenticated } from  '../../fire';
 import File from './File'
 
 class RepairsOverview extends Component {
@@ -6,10 +7,19 @@ class RepairsOverview extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            page: <File/>
+            page: null
         }
     }
 
+    componentWillMount() {
+        if (!isAuthenticated()) {
+            this.props.history.push('/');
+        } else {
+            this.setState({
+                page: <File />
+            })
+        }
+    }
 
     render() {
         return (

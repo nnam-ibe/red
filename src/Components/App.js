@@ -3,7 +3,7 @@ import AppHeader from './AppHeader'
 import AppBody from './AppBody'
 import AdminOverview from './Admin/AdminOverview'
 import RepairsOverview from './Repairs/RepairsOverview'
-import { auth, firestore, storageKey } from '../fire';
+import { auth, firestore, uid } from '../fire';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import '../App.css';
 
@@ -24,7 +24,7 @@ class App extends Component {
         auth.onAuthStateChanged((fireUser) => {
             var newUser;
             if (fireUser) {
-                window.localStorage.setItem(storageKey, fireUser.uid);
+                window.localStorage.setItem(uid, fireUser.uid);
                 newUser = this.state.user;
                 newUser.uid = fireUser.uid;
                 this.setState({ user: newUser });
@@ -32,7 +32,7 @@ class App extends Component {
                 this.setAdminPriv();
                 console.log(this.state.user);
             } else {
-                window.localStorage.removeItem(storageKey);
+                window.localStorage.removeItem(uid);
                 newUser = {
                     uid: null,
                     isAdmin: false,

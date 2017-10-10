@@ -18,7 +18,7 @@ class AppBody extends Component {
             snapShot.forEach((doc) => {
                 if ( doc.exists ) {
                     var annc = (
-                        <div className="card col-4" key={doc.id}>
+                        <div className="card col-12 col-md-6 col-lg-4" key={doc.id}>
                             <div className="card-body container">
                                 <h4 className="card-title">{doc.data().title}</h4>
                                 <p className="card-text">{doc.data().desc}</p>
