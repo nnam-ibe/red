@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { firestore, uid } from  '../../fire';
 import { Alert } from 'reactstrap';
+import { firestore, uid } from  '../../fire';
 
-class File extends Component {
+
+class Maintenance extends Component {
 
     constructor(props) {
         super(props);
@@ -143,4 +144,4 @@ class File extends Component {
 
 }
 
-export default File;
+export default Maintenance;

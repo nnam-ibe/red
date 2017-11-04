@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { firestore, uid } from  '../../fire';
-import { Alert } from 'reactstrap';
+
 
 class MyRequests extends Component {
 

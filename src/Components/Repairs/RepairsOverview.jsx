@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { isAuthenticated } from  '../../fire';
-import File from './File'
+import Maintenance from './Maintenance'
 import MyRequests from './MyRequests'
+import Requests from './Requests'
 
 class RepairsOverview extends Component {
 
@@ -17,7 +18,7 @@ class RepairsOverview extends Component {
             this.props.history.push('/');
         } else {
             this.setState({
-                page: <File />
+                page: <Maintenance />
             })
         }
     }
@@ -29,14 +30,17 @@ class RepairsOverview extends Component {
                     <div className="red-sidebar col-12 col-md-3 col-xl-2 border border-top-0 border-secondary">
                         <nav className="nav flex-column">
                             <li className="nav-item">
-                                <a id="file" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Request Repair</a>
+                                <a id="maintenance" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Maintenance Request</a>
+                            </li>
+                            <li className="nav-item">
+                                <a id="requests" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>Other Requests</a>
                             </li>
                             <li className="nav-item">
                                 <a id="my-req" href="javascript:null" className={"nav-link clickable"} onClick={this.navClick}>My Requests</a>
                             </li>
                         </nav>
                     </div>
-                    <div className="content col-12 col-md-9 col-xl-8 pt-3">
+                    <div className="content col-12 col-md-9 col-xl-10 pt-3">
                         {this.state.page}
                     </div>
                 </div>
@@ -45,9 +49,13 @@ class RepairsOverview extends Component {
     }
 
     navClick = (event) => {
-        if (event.target.id === "file") {
+        if (event.target.id === "maintenance") {
             this.setState({
-                page: (<File />)
+                page: (<Maintenance />)
+            });
+        } else if (event.target.id === "requests") {
+            this.setState({
+                page: <Requests />
             });
         } else if (event.target.id === "my-req") {
             this.setState({
